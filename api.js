@@ -53,7 +53,7 @@ const displayComm = (text) => {
   }
 };
 
-/* ============ Load Dynamic User Comment ============ */
+/* ============ Load Dynamic User ID & Title ============ */
 const addPost = () => {
     fetch("https://jsonplaceholder.typicode.com/posts")
   .then((res) => res.json())
@@ -70,3 +70,23 @@ const post = (data) => {
       postContent.appendChild(ul)
   }
 };
+
+
+
+/* ============ PUT Dynamic Data ============ */
+
+fetch('https://jsonplaceholder.typicode.com/posts/1', {
+  method: "PUT",
+  body: json.stringify({
+    id: 23,
+    name: "Riyad",
+    profession: "Worshiping Allah"
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8'
+  }
+})
+
+
+  .then(res => res.json())
+  .then(data => console.log(data.name))
