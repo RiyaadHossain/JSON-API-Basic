@@ -20,8 +20,9 @@ let parse = JSON.parse(stringify);
 
 /* ============ fetch('URL') ============ */
 
-fetch("https://jsonplaceholder.typicode.com/todos/1").then((Res) => Res.json());
-// .then(data => console.log(data))
+fetch("https://jsonplaceholder.typicode.com/todos/1")
+  .then((Res) => Res.json())
+  .then((data) => console.log(data));
 
 /* ============ Load Dynamic User Name ============ */
 
@@ -55,38 +56,34 @@ const displayComm = (text) => {
 
 /* ============ Load Dynamic User ID & Title ============ */
 const addPost = () => {
-    fetch("https://jsonplaceholder.typicode.com/posts")
-  .then((res) => res.json())
-  .then((data) => post(data));
-}
+  fetch("https://jsonplaceholder.typicode.com/posts")
+    .then((res) => res.json())
+    .then((data) => post(data));
+};
 
 const post = (data) => {
   const postContent = document.getElementById("post-con");
   const ul = document.createElement("ul");
-    for (const comm of data) {
-      const li = document.createElement('li')
-      li.innerHTML = `ID: ${comm.id} <br/> Title: ${comm.title}`
-      ul.appendChild(li)
-      postContent.appendChild(ul)
+  for (const comm of data) {
+    const li = document.createElement("li");
+    li.innerHTML = `ID: ${comm.id} <br/> Title: ${comm.title}`;
+    ul.appendChild(li);
+    postContent.appendChild(ul);
   }
 };
 
-
-
 /* ============ PUT Dynamic Data ============ */
 
-fetch('https://jsonplaceholder.typicode.com/posts/1', {
+fetch("https://jsonplaceholder.typicode.com/posts/1", {
   method: "PUT",
   body: json.stringify({
     id: 23,
     name: "Riyad",
-    profession: "Worshiping Allah"
+    profession: "Worshiping Allah",
   }),
   headers: {
-    'Content-type': 'application/json; charset=UTF-8'
-  }
+    "Content-type": "application/json; charset=UTF-8",
+  },
 })
-
-
-  .then(res => res.json())
-  .then(data => console.log(data.name))
+  .then((res) => res.json())
+  .then((data) => console.log(data.name));
