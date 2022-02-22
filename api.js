@@ -20,24 +20,53 @@ let parse = JSON.parse(stringify);
 
 /* ============ fetch('URL') ============ */
 
-fetch("https://jsonplaceholder.typicode.com/todos/1")
-    .then((Res) => Res.json())
-    // .then(data => console.log(data))
-
+fetch("https://jsonplaceholder.typicode.com/todos/1").then((Res) => Res.json());
+// .then(data => console.log(data))
 
 /* ============ Load Dynamic User Name ============ */
 
-fetch('https://jsonplaceholder.typicode.com/users')
-    .then(response => response.json())
-    .then(json => userName(json))
+fetch("https://jsonplaceholder.typicode.com/users")
+  .then((response) => response.json())
+  .then((json) => userName(json));
 
+const userName = (json) => {
+  const nameCon = document.getElementById("name-con");
 
-const userName = json => {
+  for (const id of json) {
+    let h5 = document.createElement("h5");
+    h5.innerText = id.name;
+    nameCon.appendChild(h5);
+  }
+};
 
-    console.log(json)
-   /*  for (const id of json) {
-        
-        const name = document.getElementById('user-name');
-        name.innerText = id.name
-    } */
-    }
+/* ============ Load Dynamic User Comment ============ */
+fetch("https://jsonplaceholder.typicode.com/comments")
+  .then((Response) => Response.json())
+  .then((comment) => displayComm(comment));
+
+const displayComm = (text) => {
+  const comments = document.getElementById("comment-con");
+  for (const x of text) {
+    const p = document.createElement("p");
+    p.innerText = x.body;
+    comments.appendChild(p);
+  }
+};
+
+/* ============ Load Dynamic User Comment ============ */
+const addPost = () => {
+    fetch("https://jsonplaceholder.typicode.com/posts")
+  .then((res) => res.json())
+  .then((data) => post(data));
+}
+
+const post = (data) => {
+  const postContent = document.getElementById("post-con");
+  const ul = document.createElement("ul");
+    for (const comm of data) {
+      const li = document.createElement('li')
+      li.innerHTML = `ID: ${comm.id} <br/> Title: ${comm.title}`
+      ul.appendChild(li)
+      postContent.appendChild(ul)
+  }
+};
